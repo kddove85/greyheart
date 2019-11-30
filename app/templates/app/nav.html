@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{% static "app/greyheart.png" %}"     width="120" height="96">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Available Greys</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Adopt a Grey</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="https://www.paypal.com/donate/?token=iAsgVSk32AIH2uAqtYe7z3ELTIyZ0PwzHZ4HMHAiNpMkOU7k2o8MN2-ZafFco2o_hPTDWW&country.x=US&locale.x=US">Donate</a>
+            </li>
+        </ul>
+    </div>
+    <div class="nav-item">
+        <a class="nav-link mr-auto" href="{% url 'admin:index' %}">Login</a>
+    </div>
+</nav>
+</div>

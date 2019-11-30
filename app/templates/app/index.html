@@ -1,0 +1,72 @@
+{% extends "app/base.html" %}
+
+{% block title %}Greyheart{% endblock %}
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/img.css' %}">
+
+<div class="container">
+	<br>
+	<div class="row">
+		<div class="col-sm" align="center">
+			<img src="{% static "app/nga2.png" %}" width="200" height="200">
+		</div>
+		<div class="col-sm" align="center">
+			<img src="{% static "app/map.png" %}" width="200" height="200">
+    	</div>
+	</div>
+	<br>
+	<div class="row">
+    <div class="col-sm">
+		<h1>Our Mission</h1>
+  		<p align="justify">
+			GreyHeart Greyhound Adoption is devoted to the adoption of the retired racing greyhound. It is our objective
+			to place as many greyhounds as possible into responsible, loving homes.
+		</p>
+    </div>
+    <div class="col-sm">
+		<h1>Our Operation</h1>
+		<p align="justify">
+			We are a registered, non profit 501(c)3 organization, supported only through donations and fund raising
+			efforts. ​The donation received through the placement of each dog, pays for the transportation and medical
+			costs. We also rely heavily on the efforts of our volunteers. Without their assistance, especially the work
+			of those willing to foster, we could not accomplish our goal. If YOU are willing to participate, please
+			contact us.
+		</p>
+ 		<p>
+			We invite any questions you might have so feel free to send us an e-mail.
+		</p>
+
+    </div>
+  </div>
+
+	{% if greys_list %}
+        {% for greyhound in greys_list %}
+			<br>
+			<div class="row">
+				<h1>Meet {{ greyhound.name }}</h1>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<img src={{ greyhound.profile_image.url }} class="img-thumbnail">
+				</div>
+				<div class="col-9">
+					<p align="justify">{{ greyhound.bio }}</p>
+				</div>
+			</div>
+        {% endfor %}
+	{% endif %}
+	<br>
+<!--	<div class="card bg-light">-->
+<!--	  <div class="card-body">-->
+<!--		<blockquote class="blockquote mb-0">-->
+<!--		  <h2 class="font-italic" align="center">If You Open Your Heart To Them, They Will Open Your Eyes.</h2>-->
+<!--		</blockquote>-->
+<!--	  </div>-->
+	</div>
+	<br>
+</div>
+
+{% endblock %}

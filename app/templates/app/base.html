@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% block head %}
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	{% endblock %}
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div class="header bg-light">
+        {% include 'app/nav.html' %}
+    </div>
+<!--	<div class="container">-->
+    <main role="main" class="container">
+		{% block content %}{% endblock %}
+    </main>
+	{% block scripts %}{% endblock %}
+
+    {% include 'app/footer.html' %}
+</body>
+
+
+
+</html>

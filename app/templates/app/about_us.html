@@ -1,0 +1,30 @@
+{% extends "app/base.html" %}
+
+{% block title %}Greyheart{% endblock %}
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/img.css' %}">
+
+<div class="container">
+    <br>
+    {% if board_members_list %}
+        <h1>Our Board Members</h1>
+        <div class="card-group" display="flex">
+        {% for member in board_members_list %}
+            <div class="card border-primary mb-3" max-width="18px">
+                <h4 class="card-header" align="center">{{ member.name }}</h4>
+              <img src="{{ member.profile_image.url }}" class="card-img-top">
+              <div class="card-body">
+                  <h5 class="card-title">{{ member.status }}</h5>
+                  <p class="card-text">{{ member.bio }}</p>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    <br>
+</div>
+
+{% endblock %}
