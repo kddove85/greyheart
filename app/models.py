@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import ImageField
 import os
 from cloudinary.models import CloudinaryField
 
