@@ -1,0 +1,49 @@
+{% extends "app/base.html" %}
+
+{% block title %}Greyheart{% endblock %}
+{% block content %}
+
+{% load static %}
+
+{% with my_width="5%" %}
+
+<!--<link rel="stylesheet" href="{% static 'css/img.css' %}">-->
+
+<div class="container">
+    <br>
+    {% if not available_greys_list %}
+        <h1>No Available Greyhounds</h1>
+    {% else %}
+        <h1>Available Greyhounds</h1>
+
+        <table class="table table-image table-striped table-borderless">
+            <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Dog Friendly</th>
+                    <th scope="col">Cat Friendly</th>
+                    <th scope="col">Kid Friendly</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for grey in available_greys_list %}
+            <tr>
+              <td><img src={{ grey.profile_image.url }} class="img-fluid img-thumbnail" style="width:70%"></td>
+                <td width={{my_width}}><b>{{ grey.name }}</b></td>
+              <td width="40%" align="justify">{{ grey.bio }}</td>
+              <td width={{my_width}}>{{ grey.is_dog_friendly }}</td>
+              <td width={{my_width}}>{{ grey.is_cat_friendly }}</td>
+              <td width={{my_width}}>{{ grey.is_kid_friendly }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <br>
+</div>
+
+{% endwith %}
+
+{% endblock %}

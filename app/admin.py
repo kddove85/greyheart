@@ -5,12 +5,19 @@ from .models import BoardMember
 
 # Register your models here.
 class GreyhoundAdmin(admin.ModelAdmin):
-    fields = ['name', 'bio', 'is_spotlight', 'profile_image']
+    fields = ['name',
+              'bio',
+              'is_available',
+              'is_dog_friendly',
+              'is_cat_friendly',
+              'is_kid_friendly',
+              'is_spotlight',
+              'profile_image']
     list_display = ('name',)
 
 
 class BoardMemberAdmin(admin.ModelAdmin):
-    fields = ['name', 'status', 'bio', 'profile_image']
+    fields = ['name', 'title', 'bio', 'profile_image']
     list_display = ('name',)
 
 
