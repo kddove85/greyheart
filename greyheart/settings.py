@@ -21,8 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'uif%l@qd3-=ii(ik4gfh2mwd24caba#i$^zd-qmz4*)1%h#e3m'
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'uif%l@qd3-=ii(ik4gfh2mwd24caba#i$^zd-qmz4*)1%h#e3m'
+# SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
     'bootstrap4',
     'app.apps.AppConfig',
     'django.contrib.admin',
@@ -85,6 +86,13 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+CLOUDINARY = {
+  'cloud_name': os.getenv('CLOUD_NAME'),
+  'api_key': os.getenv('CLOUD_API_KEY'),
+  'api_secret': os.getenv('CLOUD_API_SECRET'),
+}
+
 
 
 # Password validation
