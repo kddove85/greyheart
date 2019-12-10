@@ -2,8 +2,9 @@
 
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="{% static "app/greyheart.png" %}"     width="120" height="96">
+    <a class="navbar-brand" href="{% url 'index' %}">
+<!--        24x13-->
+        <img src="{% static "app/greyheart.png" %}"     width="168" height="91">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +19,7 @@
                 <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Available Greys</a>
+                <a class="nav-link" href="{% url 'available_greys' %}">Available Greys</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">Adopt a Grey</a>
@@ -36,7 +37,7 @@
         </ul>
     </div>
     <div class="nav-item">
-        <a class="nav-link mr-auto" href="{% url 'admin:index' %}">Login</a>
+        <a class="nav-link mr-auto" href="{% url 'admin:index' %}">Admin</a>
     </div>
 </nav>
 </div>
