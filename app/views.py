@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -12,19 +12,19 @@ from .forms import AdoptionForm
 
 def index(request):
     greys_list = Greyhound.objects.all().filter(is_spotlight=True)
-    context = {'greys_list': greys_list}
+    context = {'greys_list': greys_list, 'title': None}
     return render(request, 'app/index.html', context)
 
 
 def about_us(request):
     board_members_list = BoardMember.objects.all()
-    context = {'board_members_list': board_members_list}
+    context = {'board_members_list': board_members_list, 'title': 'About Us'}
     return render(request, 'app/about_us.html', context)
 
 
 def available_greys(request):
     available_greys_list = Greyhound.objects.all().filter(is_available=True)
-    context = {'available_greys_list': available_greys_list}
+    context = {'available_greys_list': available_greys_list, 'title': 'Available Greys'}
     return render(request, 'app/available_greys.html', context)
 
 
@@ -42,10 +42,10 @@ def get_adoption_form(request):
                 messages.add_message(request, messages.SUCCESS, f'Successfully submitted adoption form')
             except:
                 messages.add_message(request, messages.ERROR, f'An error occurred while attempting to submit form')
-            return render(request, 'app/index.html', context)
+            return index(request)
     else:
         form = AdoptionForm()
-        return render(request, 'app/adopt.html', {'form': form})
+        return render(request, 'app/adopt.html', {'form': form, 'title': 'Adopt a Grey'})
 
 
 def compose_message(form):

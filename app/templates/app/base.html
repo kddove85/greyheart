@@ -4,6 +4,14 @@
 <head>
 	{% block head %}
 
+    <title>
+        {% if title %}
+            Greyheart: {{ title }}
+        {% else %}
+            Greyheart
+        {% endif %}
+    </title>
+
     {% load cloudinary %}
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
