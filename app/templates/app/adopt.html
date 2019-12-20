@@ -1,10 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "app/base.html" %}
 
-</body>
-</html>
+{% block title %}Greyheart{% endblock %}
+{% block content %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+<br>
+<h1>Application for Adoption & Fostering</h1>
+<br>
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-3">
+        {{ form.first_name|as_crispy_field }}
+      </div>
+      <div class="col-3">
+        {{ form.last_name|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+        {{ form.email|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        {{ form.phone_number|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        {{ form.occupation|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        {{ form.involvement|as_crispy_field }}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <h3>Address</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        {{ form.street|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        {{ form.city|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        {{ form.state|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        {{ form.zip|as_crispy_field }}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <h3>Lifestyle</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+            {{ form.occupant_time|as_crispy_field }}
+      </div>
+        <div class="col-4">
+            {{ form.activity_level|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+            {{ form.dwelling|as_crispy_field }}
+      </div>
+        <div class="col-4">
+            {{ form.rent_or_own|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            {{ form.other_pets|as_crispy_field }}
+        </div>
+        <div class="col-8">
+            {{ form.permission|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            {{ form.occupants|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            {{ form.awareness|as_crispy_field }}
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <input type="submit" value="Submit">
+</form>
+
+<br>
+
+{% endblock %}
