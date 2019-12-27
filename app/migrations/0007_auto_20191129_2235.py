@@ -11,14 +11,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='boardmember',
-            name='profile_image',
-            field=models.ImageField(blank=True, null=True, upload_to=app.models.get_board_member_image_path),
-        ),
-        migrations.AlterField(
-            model_name='greyhound',
-            name='profile_image',
-            field=models.ImageField(blank=True, null=True, upload_to=app.models.get_greyhound_image_path),
-        ),
+
     ]

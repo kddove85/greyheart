@@ -11,13 +11,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='greyhound',
-            name='photo_path',
-        ),
-        migrations.AddField(
-            model_name='greyhound',
-            name='profile_image',
-            field=models.ImageField(blank=True, null=True, upload_to=app.models.get_image_path),
-        ),
+
     ]

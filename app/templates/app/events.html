@@ -1,0 +1,39 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% with my_width="5%" %}
+
+<div class="container">
+    <br>
+    {% if not events_list %}
+        <h1>No Upcoming Events</h1>
+    {% else %}
+        <h1>Upcoming Events</h1>
+        {% for event in events_list %}
+            <table class="table table-image table-striped table-borderless blue">
+                <tbody>
+                    <tr>
+                        <td><img src={{ event.photo }} class="img-thumbnail"></td>
+                        <td style="width:80%">
+                            <h2>{{ event.name }}</h2>
+                            <br>
+                            <b>{{ event.event_date }} {{event.start_time}} {{event.start_am_pm}} - {{event.end_time}} {{event.end_am_pm}}</b>
+                            <br>
+                            Hosted by {{ event.host }}
+                            <br>
+                            <a href="https://maps.google.com/?q={{ event.address }}">{{ event.address }}</a>
+                        </td>
+                    </tr>
+        {% endfor %}
+                </tbody>
+            </table>
+    {% endif %}
+    <br>
+</div>
+
+{% endwith %}
+
+{% endblock %}
