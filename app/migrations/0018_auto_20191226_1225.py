@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='greyhound',
-            name='photo_path',
-        ),
+        # migrations.RemoveField(
+        #     model_name='greyhound',
+        #     name='photo_path',
+        # ),
         migrations.AddField(
             model_name='boardmember',
             name='profile_image',
