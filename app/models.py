@@ -1,18 +1,20 @@
 from django.db import models
-import os
+from django.core.exceptions import ValidationError
+from datetime import datetime, timedelta
 from cloudinary.models import CloudinaryField
 
+start_date = datetime(2000, 1, 1, 0, 0, 0)
+TIMES = []
+for td in (start_date + timedelta(minutes=30 * it) for it in range(24)):
+    TIMES.append((td.strftime("%I:%M"), td.strftime("%I:%M")))
 
-def get_image_path(instance, filename):
-    pass
+HOURS = [(x, x) for x in range(1, 13)]
+AM_PM = [('AM', 'AM'),
+         ('PM', 'PM'),
+         ]
 
-
-def get_greyhound_image_path(instance, filename):
-    return os.path.join('greyhounds', filename)
-
-
-def get_board_member_image_path(instance, filename):
-    return os.path.join('boardmembers', filename)
+USABLE_PHOTOS = [('media\event_photos\meet_n_greet.png', 'Meet & Greet')
+                 ]
 
 
 # Create your models here.
@@ -53,9 +55,8 @@ class Greyhound(models.Model):
         default=YES,
     )
 
-    is_spotlight = models.BooleanField(default=False)
+    spotlight = models.TextField(blank=True, null=True)
     profile_image = CloudinaryField('image', blank=True, null=True)
-    # profile_image = ImageField(upload_to=get_greyhound_image_path, blank=True, null=True)
 
 
 class BoardMember(models.Model):
@@ -63,11 +64,26 @@ class BoardMember(models.Model):
     title = models.CharField(max_length=255)
     bio = models.TextField()
     profile_image = CloudinaryField('image', blank=True, null=True)
-    # profile_image = ImageField(upload_to=get_board_member_image_path, blank=True, null=True)
 
 
 class Event(models.Model):
-    pass
+    name = models.CharField(max_length=255, null=True)
+    event_date = models.DateField(null=True)
+    start_time = models.CharField(choices=TIMES, default=1, max_length=10)
+    start_am_pm = models.CharField(max_length=2, choices=AM_PM, default='AM', )
+    end_time = models.CharField(choices=TIMES, default=1, max_length=10)
+    end_am_pm = models.CharField(max_length=2, choices=AM_PM, default='AM',)
+    host = models.CharField(max_length=255, null=True)
+    address = models.TextField(null=True)
+    photo = models.CharField(choices=USABLE_PHOTOS, max_length=255, null=True)
+
+    def clean(self):
+        time_format = '%I:%M %p'
+        dt_start_time = datetime.strptime(f"{self.start_time} {self.start_am_pm}", time_format)
+        dt_end_time = datetime.strptime(f"{self.end_time} {self.end_am_pm}", time_format)
+        if dt_start_time > dt_end_time:
+            raise ValidationError("Event cannot end before it begins!")
+        return super().clean()
 
 
 class Tribute(models.Model):

@@ -18,7 +18,6 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255)),
                 ('status', models.CharField(max_length=255)),
                 ('bio', models.TextField()),
-                ('profile_image', models.ImageField(blank=True, null=True, upload_to=app.models.get_image_path)),
             ],
         ),
     ]

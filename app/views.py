@@ -1,17 +1,16 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.template import loader
 from django.contrib import messages
 from django.core.mail import send_mail
+from datetime import datetime
 
 from .models import Greyhound
 from .models import BoardMember
+from .models import Event
 from .forms import AdoptionForm
 
 
 def index(request):
-    greys_list = Greyhound.objects.all().filter(is_spotlight=True)
+    greys_list = Greyhound.objects.all().exclude(spotlight__exact='')
     context = {'greys_list': greys_list, 'title': None}
     return render(request, 'app/index.html', context)
 
@@ -28,15 +27,31 @@ def available_greys(request):
     return render(request, 'app/available_greys.html', context)
 
 
+def events(request):
+    events_list = Event.objects.all().filter(event_date__gte=datetime.today())
+
+    for event in events_list:
+        event.start_time = clean_time(event.start_time)
+        event.end_time = clean_time(event.end_time)
+
+    context = {'events_list': events_list, 'title': 'Events'}
+    return render(request, 'app/events.html', context)
+
+
+def clean_time(time_str):
+    if time_str.startswith('0'):
+        time_str = time_str[1:]
+    return time_str
+
+
 def get_adoption_form(request):
-    greys_list = Greyhound.objects.all().filter(is_spotlight=True)
+    greys_list = Greyhound.objects.all().exclude(spotlight__exact='')
     context = {'greys_list': greys_list}
     if request.method == 'POST':
         form = AdoptionForm(request.POST)
         if form.is_valid():
             try:
                 subject = 'Greyheart Adoption Form'
-                message = 'Greyheart Adoption Form goes Here'
                 message = compose_message(form)
                 send_mail(subject, message, 'greyheart.us@gmail.com', ['greyheart.us@gmail.com'], fail_silently=False)
                 messages.add_message(request, messages.SUCCESS, f'Successfully submitted adoption form')

@@ -1,6 +1,5 @@
 {% extends "app/base.html" %}
 
-{% block title %}Greyheart{% endblock %}
 {% block content %}
 
 {% load static %}
@@ -53,18 +52,12 @@
 					<img src={{ greyhound.profile_image.url }} class="img-thumbnail">
 				</div>
 				<div class="col-9">
-					<p align="justify">{{ greyhound.bio }}</p>
+					<p align="justify">{{ greyhound.spotlight }}</p>
 				</div>
 			</div>
         {% endfor %}
 	{% endif %}
 	<br>
-<!--	<div class="card bg-light">-->
-<!--	  <div class="card-body">-->
-<!--		<blockquote class="blockquote mb-0">-->
-<!--		  <h2 class="font-italic" align="center">If You Open Your Heart To Them, They Will Open Your Eyes.</h2>-->
-<!--		</blockquote>-->
-<!--	  </div>-->
 	</div>
 	<br>
 </div>

@@ -1,6 +1,9 @@
 from django.contrib import admin
+from django import forms
+from datetime import datetime
 from .models import Greyhound
 from .models import BoardMember
+from .models import Event
 from cloudinary import uploader
 
 
@@ -25,7 +28,7 @@ class GreyhoundAdmin(admin.ModelAdmin):
               'is_dog_friendly',
               'is_cat_friendly',
               'is_kid_friendly',
-              'is_spotlight',
+              'spotlight',
               'profile_image']
     list_display = ('name',)
     actions = [delete_model]
@@ -45,5 +48,11 @@ class BoardMemberAdmin(admin.ModelAdmin):
     actions = [delete_model]
 
 
+class EventAdmin(admin.ModelAdmin):
+    fields = ['name', 'event_date', 'start_time', 'start_am_pm', 'end_time', 'end_am_pm', 'host', 'address', 'photo']
+    list_display = ('name', 'event_date', 'start_time', 'start_am_pm', 'end_time', 'end_am_pm', 'host')
+
+
 admin.site.register(Greyhound, GreyhoundAdmin)
 admin.site.register(BoardMember, BoardMemberAdmin)
+admin.site.register(Event, EventAdmin)
