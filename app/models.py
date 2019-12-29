@@ -62,6 +62,7 @@ class Greyhound(models.Model):
 class BoardMember(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
+    position = models.IntegerField(default=1)
     bio = models.TextField()
     profile_image = CloudinaryField('image', blank=True, null=True)
 

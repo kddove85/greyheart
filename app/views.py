@@ -16,7 +16,7 @@ def index(request):
 
 
 def about_us(request):
-    board_members_list = BoardMember.objects.all()
+    board_members_list = BoardMember.objects.all().order_by('position')
     context = {'board_members_list': board_members_list, 'title': 'About Us'}
     return render(request, 'app/about_us.html', context)
 
