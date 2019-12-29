@@ -17,11 +17,6 @@ class Migration(migrations.Migration):
             field=models.IntegerField(default=1),
         ),
         migrations.AddField(
-            model_name='boardmember',
-            name='profile_image',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, null=True, verbose_name='image'),
-        ),
-        migrations.AddField(
             model_name='greyhound',
             name='profile_image',
             field=cloudinary.models.CloudinaryField(blank=True, max_length=255, null=True, verbose_name='image'),
