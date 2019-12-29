@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django import forms
-from datetime import datetime
 from .models import Greyhound
 from .models import BoardMember
 from .models import Event
@@ -42,8 +40,8 @@ class BoardMemberAdmin(admin.ModelAdmin):
             del actions['delete_selected']
         return actions
 
-    fields = ['name', 'title', 'bio', 'profile_image']
-    list_display = ('name',)
+    fields = ['name', 'title', 'position', 'bio', 'profile_image']
+    list_display = ('name', 'title', 'position')
 
     actions = [delete_model]
 
