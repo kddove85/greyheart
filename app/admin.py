@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Greyhound
+from .models import GreyPhoto
 from .models import BoardMember
 from .models import Event
 from cloudinary import uploader
@@ -26,10 +27,15 @@ class GreyhoundAdmin(admin.ModelAdmin):
               'is_dog_friendly',
               'is_cat_friendly',
               'is_kid_friendly',
-              'spotlight',
-              'profile_image']
+              'spotlight',]
     list_display = ('name',)
     actions = [delete_model]
+
+
+class GreyPhotoAdmin(admin.ModelAdmin):
+    fields = ['grey',
+              'profile_image']
+    list_display = ('grey', 'profile_image')
 
 
 class BoardMemberAdmin(admin.ModelAdmin):
@@ -52,5 +58,6 @@ class EventAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Greyhound, GreyhoundAdmin)
+admin.site.register(GreyPhoto, GreyPhotoAdmin)
 admin.site.register(BoardMember, BoardMemberAdmin)
 admin.site.register(Event, EventAdmin)

@@ -4,14 +4,19 @@ from django.core.mail import send_mail
 from datetime import datetime
 
 from .models import Greyhound
+from .models import GreyPhoto
 from .models import BoardMember
 from .models import Event
 from .forms import AdoptionForm
 
 
 def index(request):
+    grey_photos_dict = {}
     greys_list = Greyhound.objects.all().exclude(spotlight__exact='')
-    context = {'greys_list': greys_list, 'title': None}
+    for greyhound in greys_list:
+        grey_photo_list = GreyPhoto.objects.all().filter(grey=greyhound.id)
+        grey_photos_dict[greyhound.id] = grey_photo_list
+    context = {'greys_list': greys_list, 'grey_photos': grey_photos_dict, 'title': None}
     return render(request, 'app/index.html', context)
 
 
@@ -22,8 +27,12 @@ def about_us(request):
 
 
 def available_greys(request):
+    grey_photos_dict = {}
     available_greys_list = Greyhound.objects.all().filter(is_available=True)
-    context = {'available_greys_list': available_greys_list, 'title': 'Available Greys'}
+    for greyhound in available_greys_list:
+        grey_photo_list = GreyPhoto.objects.all().filter(grey=greyhound.id)
+        grey_photos_dict[greyhound.id] = grey_photo_list
+    context = {'available_greys_list': available_greys_list, 'grey_photos': grey_photos_dict, 'title': 'Available Greys'}
     return render(request, 'app/available_greys.html', context)
 
 
