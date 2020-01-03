@@ -56,6 +56,13 @@ class Greyhound(models.Model):
     )
 
     spotlight = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class GreyPhoto(models.Model):
+    grey = models.ForeignKey(Greyhound, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', blank=True, null=True)
 
 
