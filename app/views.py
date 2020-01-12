@@ -7,6 +7,7 @@ from .models import Greyhound
 from .models import GreyPhoto
 from .models import BoardMember
 from .models import Event
+from .models import Tribute
 from .forms import AdoptionForm
 
 
@@ -86,3 +87,72 @@ def compose_message(form):
                f"How many people live in your household? {form.data['permission']}",
                f"Are all of the adults in your household aware of this adoption/foster and agree to it? {form.data['awareness']}"]
     return "\n".join(strings)
+
+
+def tributes(request):
+    current_year = datetime.now().year
+    tributes_list = Tribute.objects.filter(year_lost=current_year)
+    possible_years = Tribute.objects.order_by('-year_lost').values('year_lost').distinct()
+
+    tribute_list_for_view = []
+    row_entries = []
+    counter = 1
+    row = 1
+
+    for item in tributes_list:
+
+        if counter % 3 == 1:
+            row_entries.append(item)
+        if counter % 3 == 2:
+            row_entries.append(item)
+        if counter % 3 == 0:
+            row_entries.append(item)
+
+        if len(row_entries) == 3:
+            tribute_list_for_view.append(row_entries)
+            row += 1
+
+            row_entries = []
+
+        counter += 1
+
+    if len(row_entries) > 0:
+        tribute_list_for_view.append(row_entries)
+
+    context = {'tributes_list': tribute_list_for_view, 'current_year': current_year, 'all_years': possible_years,
+               'title': 'Tributes'}
+    return render(request, 'app/tributes.html', context)
+
+
+def tributes_year_lost(request, year_lost):
+    tributes_list = Tribute.objects.filter(year_lost=year_lost)
+    possible_years = Tribute.objects.order_by('-year_lost').values('year_lost').distinct()
+
+    tribute_list_for_view = []
+    row_entries = []
+    counter = 1
+    row = 1
+
+    for item in tributes_list:
+
+        if counter % 3 == 1:
+            row_entries.append(item)
+        if counter % 3 == 2:
+            row_entries.append(item)
+        if counter % 3 == 0:
+            row_entries.append(item)
+
+        if len(row_entries) == 3:
+            tribute_list_for_view.append(row_entries)
+            row += 1
+
+            row_entries = []
+
+        counter += 1
+
+    if len(row_entries) > 0:
+        tribute_list_for_view.append(row_entries)
+
+    context = {'tributes_list': tribute_list_for_view, 'current_year': year_lost, 'all_years': possible_years,
+               'title': 'Tributes'}
+    return render(request, 'app/tributes.html', context)

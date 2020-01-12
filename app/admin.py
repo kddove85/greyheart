@@ -3,6 +3,7 @@ from .models import Greyhound
 from .models import GreyPhoto
 from .models import BoardMember
 from .models import Event
+from .models import Tribute
 from cloudinary import uploader
 
 
@@ -57,7 +58,13 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'event_date', 'start_time', 'start_am_pm', 'end_time', 'end_am_pm', 'host')
 
 
+class TributeAdmin(admin.ModelAdmin):
+    fields = ['name', 'year_lost', 'profile_image']
+    list_display = ('name', 'year_lost')
+
+
 admin.site.register(Greyhound, GreyhoundAdmin)
 admin.site.register(GreyPhoto, GreyPhotoAdmin)
 admin.site.register(BoardMember, BoardMemberAdmin)
 admin.site.register(Event, EventAdmin)
+admin.site.register(Tribute, TributeAdmin)
