@@ -1,0 +1,57 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% with my_width="5%" %}
+
+<div class="container">
+    <br>
+    {% if not tributes_list %}
+        <h1>No Tributes for this Year</h1>
+    {% else %}
+        <h1 align="center"> {{ current_year }} </h1>
+        {% for row in tributes_list %}
+            <table class="table table-image table-striped table-borderless blue">
+                <tbody>
+                    <tr>
+                        {% if row.0 %}
+                            <td align="center"><img src={{ row.0.profile_image.url }} class="img-thumbnail" style="height: 320px; width: 300px"></td>
+                        {% endif %}
+                        {% if row.1 %}
+                            <td align="center"><img src={{ row.1.profile_image.url }} class="img-thumbnail" style="height: 320px; width: 300px"></td>
+                        {% endif %}
+                        {% if row.2 %}
+                            <td align="center"><img src={{ row.2.profile_image.url }} class="img-thumbnail" style="height: 320px; width: 300px"></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        {% if row.0 %}
+                            <td class="h3" align="center">{{ row.0.name }}</td>
+                        {% endif %}
+                        {% if row.1 %}
+                            <td class="h3" align="center">{{ row.1.name }}</td>
+                        {% endif %}
+                        {% if row.2 %}
+                            <td class="h3" align="center">{{ row.2.name }}</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        <br>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <div align="center" style="font-size:150%">
+        {% for year in all_years %}
+            <a href="{% url 'tributes_year_lost' year.year_lost %}">{{ year.year_lost }} </a>
+        {% endfor %}
+    </div>
+    <br>
+
+</div>
+
+{% endwith %}
+
+{% endblock %}

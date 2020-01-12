@@ -95,4 +95,6 @@ class Event(models.Model):
 
 
 class Tribute(models.Model):
-    pass
+    name = models.CharField(max_length=255, null=True)
+    year_lost = models.CharField(max_length=4, null=False)
+    profile_image = CloudinaryField('image', blank=True, null=True)
