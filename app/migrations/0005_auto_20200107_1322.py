@@ -12,11 +12,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='boardmember',
-            name='profile_image',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, null=True, verbose_name='image'),
-        ),
-        migrations.AddField(
             model_name='tribute',
             name='name',
             field=models.CharField(max_length=255, null=True),
